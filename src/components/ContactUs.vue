@@ -107,7 +107,6 @@
         :display="display"
         :statusColor="statusColor"
         :message="message"
-        :close="closeSnackBar"
       />
     </div>
   </form>
@@ -197,14 +196,14 @@ export default {
     handleResponse(status) {
       status
         ? this.snackBarVisibility(
-            "thanks for contacting us. our team will reach out shortly",
-            true,
-            "green"
-          )
+          "thanks for contacting us. our team will reach out shortly",
+          true,
+          "green"
+        )
         : this.snackBarVisibility(
-            "sorry! an error occured while submitting. try after some time",
-            true
-          )
+          "sorry! an error occured while submitting. try after some time",
+          true
+        )
     },
     snackBarVisibility(message, statusColor) {
       this.message = message
