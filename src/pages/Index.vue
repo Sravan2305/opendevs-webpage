@@ -248,18 +248,16 @@
             </div>
           </div>
         </section>
-
-        <section class="pb-20 pt-48 relative block bg-gray-900 mt-24 my-style">
-          <div class="box">
-                <div class ="one" >
-                  <FollowUs />
-                </div>
-                <div class="two">
-                  <VerticalBar />
-                </div>
-                <div class="three">
-                  <ContactUs />
-                </div>
+        <section class="pb-20 pt-20 relative block bg-gray-900">
+          <div class="container mx-auto">
+            <div class="flex flex-wrap items-center justify-center lg:divide-x">
+              <div class="w-full lg:w-4/12 ml-auto mr-auto px-12">
+                <FollowUs />
+              </div>
+              <div class="w-full lg:w-8/12 ml-auto mr-auto px-12">
+                <ContactUs />
+              </div>
+            </div>
           </div>
         </section>
       </main>
@@ -270,34 +268,14 @@
 <script>
 import ContactUs from "../components/ContactUs.vue"
 import FollowUs from "../components/FollowUs.vue"
-import VerticalBar from "../components/VerticalBar.vue"
-
 export default {
-  components: { ContactUs, FollowUs, VerticalBar },
+  components: { ContactUs, FollowUs },
   metaInfo: {
     title: "Home"
   }
 }
 </script>
 
-<style scoped>
-      .box {
-        display: flex;
-      }
-
-      .one {
-        flex: 2 1 auto;
-      }
-
-      .two {
-        flex: 1 1 auto;
-      }
-
-      .three {
-        flex: 1 1 auto;
-      }
-  
-</style>
 <page-query>
   query getConfigData {
     metadata {

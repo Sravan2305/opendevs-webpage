@@ -4,7 +4,7 @@
       <div class="items-center flex flex-wrap">
         <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
           <div class="py-4">
-            <h1 class="font-semibold text-5xl underline">The Craftsmen</h1>
+            <h1 class="font-semibold text-5xl underline">the craftsmen</h1>
           </div>
         </div>
       </div>

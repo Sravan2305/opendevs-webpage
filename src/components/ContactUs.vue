@@ -1,13 +1,13 @@
 <template>
-  <form class="w-full max-w-lg contact-form">
-    <h2 class="text-4xl font-semibold text-white text-center">
-      want to say something
-    </h2>
+  <form class="contact-form">
+    <p
+      class="text-lg leading-relaxed mt-4 mb-4 text-gray-500 text-center justify-center"
+    >
+      or let's talk directly (we won't spam, promise):
+    </p>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label
-          class="block uppercase tracking-wide text-yellow-700 text-xs font-bold mb-2"
-        >
+        <label class="block tracking-wide text-green-700 font-bold mb-2">
           name <sup>{{ " " }}*</sup>
         </label>
         <input
@@ -19,14 +19,12 @@
           @change="changeHandler"
           name="username"
         />
-        <p v-if="this.usernameerr" class="text-red-500 text-xs italic">
+        <p v-if="this.usernameErr" class="text-red-500 text-xs italic">
           entered name is not valid
         </p>
       </div>
       <div class="w-full md:w-1/2 px-3">
-        <label
-          class="block uppercase tracking-wide text-yellow-700 text-xs font-bold mb-2"
-        >
+        <label class="block tracking-wide text-green-700 font-bold mb-2">
           mobile
         </label>
         <input
@@ -38,16 +36,14 @@
           @change="changeHandler"
           name="mobile"
         />
-        <p v-if="this.mobileerr" class="text-red-500 text-xs italic">
+        <p v-if="this.mobileErr" class="text-red-500 text-xs italic">
           invalid mobile number
         </p>
       </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
-        <label
-          class="block uppercase tracking-wide text-yellow-700 text-xs font-bold mb-2"
-        >
+        <label class="block tracking-wide text-green-700 font-bold mb-2">
           e-mail<sup>{{ " " }}*</sup>
         </label>
         <input
@@ -59,16 +55,14 @@
           @change="changeHandler"
           name="email"
         />
-        <p v-if="this.emailerr" class="text-red-500 text-xs italic">
+        <p v-if="this.emailErr" class="text-red-500 text-xs italic">
           invalid email format
         </p>
       </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
-        <label
-          class="block uppercase tracking-wide text-yellow-700 text-xs font-bold mb-2"
-        >
+        <label class="block tracking-wide text-green-700 font-bold mb-2">
           subject<sup>{{ " " }}*</sup>
         </label>
         <input
@@ -78,16 +72,14 @@
           @change="changeHandler"
           name="subject"
         />
-        <p v-if="this.subjecterr" class="text-red-500 text-xs italic">
+        <p v-if="this.subjectErr" class="text-red-500 text-xs italic">
           subject line is not appropriate
         </p>
       </div>
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
-        <label
-          class="block uppercase tracking-wide text-yellow-700 text-xs font-bold mb-2"
-        >
+        <label class="block tracking-wide text-green-700 font-bold mb-2">
           description
         </label>
         <textarea
@@ -100,7 +92,7 @@
         ></textarea>
       </div>
     </div>
-    <p v-if="this.descriptionerr" class="text-red-500 text-xs italic">
+    <p v-if="this.descriptionErr" class="text-red-500 text-xs italic">
       description can be of maximum 1024 words
     </p>
     <div class="text-center">
@@ -111,33 +103,44 @@
       >
         send
       </button>
+      <SnackBar
+        :display="display"
+        :statusColor="statusColor"
+        :message="message"
+        :close="closeSnackBar"
+      />
     </div>
   </form>
 </template>
 
 <script>
 import * as InputValidations from "../utils/InputValidations"
-import { init } from "emailjs-com"
-init("user_TGyjnXnxapi7xn7FPpyTE")
+import { init, send } from "emailjs-com"
+import SnackBar from "./SnackBar.vue"
+
+init(process.env.GRIDSOME_EMAILJS_USER_ID)
+
 export default {
   name: "ContactUs",
-  data: function () {
-    const userdata = JSON.parse(localStorage.getItem("userdata"))
-    return {
-      username: userdata?.username || "",
-      email: userdata?.email || "",
-      subject: "",
-      text: "",
-      mobile: userdata?.mobile || "",
-      description: "",
-      usernameerr: false,
-      emailerr: false,
-      subjecterr: false,
-      texterr: false,
-      mobileerr: false,
-      descriptionerr: false,
-    }
-  },
+  components: { SnackBar },
+  data: () => ({
+    username: "",
+    email: "",
+    subject: "",
+    text: "",
+    statusColor: "",
+    message: "",
+    mobile: "",
+    description: "",
+    usernameErr: false,
+    emailErr: false,
+    subjectErr: false,
+    texterr: false,
+    mobileErr: false,
+    descriptionErr: false,
+    success: false,
+    display: false,
+  }),
   methods: {
     submit() {
       const {
@@ -154,30 +157,21 @@ export default {
         validateDescription(this.description) &&
         validateSubject(this.subject)
       ) {
-        // const data = {
+        const emailData = {
+          username: this.username,
+          email: this.email,
+          mobile: this.mobile || "Not provided",
+          subject: this.subject,
+          description: this.description || "Not provided",
+        }
+        const TEMPLATE_ID = process.env.GRIDSOME_EMAILJS_TEMPLATE_ID
+        const SERVICE_ID = process.env.GRIDSOME_EMAILJS_SERVICE_ID
+        send(SERVICE_ID, TEMPLATE_ID, emailData).then(
+          () => this.handleResponse(true),
+          () => this.handleResponse(false)
+        )
 
-        //     username: this.username,
-        //     email: this.email,
-        //     mobile: this.mobile || "Not provided",
-        //     subject: this.subject,
-        //     description: this.description || "Not provided"
-
-        // };
-        // const TEMPLATE_ID = "template_xgwzxjg"
-        // const SERVICE_ID = "service_y6z2vei"
-        // emailjs                                                                         ////EMAIL JS CODE
-        //   .send(SERVICE_ID, TEMPLATE_ID, data)
-        //   .then(
-        //     function(response) {
-        //      
-        //     },
-        //     function(error) {
-        //       
-        //     }
-        //   );
-        //   ////////////////////////////////
-
-        const data = {
+        const sheetsData = {
           Name: this.username,
           Email: this.email,
           Mobile: this.mobile || "Not provided",
@@ -185,85 +179,61 @@ export default {
           Description: this.description || "Not provided",
         }
 
-        fetch(
-          "https://sheet.best/api/sheets/3cd750cf-72c4-4cfd-bfd6-82f106c577df",           ///change url
-          {
-            method: "POST",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),                                                    /////Google Sheet Code
-          }
+        fetch(process.env.GRIDSOME_SHEET_BEST_URL, {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sheetsData), /////Google Sheet Code
+        }).then(
+          () => this.handleResponse(true),
+          () => this.handleResponse(false)
         )
-          .then((response) => response.json())
-          .then((data) => {
-          //show succes msg
-            console.log(data)
-          })
-          .catch((err) => {
-            //show error
-            console.log(err)
-          })
-
-      } 
-      
-      
-      else {
-   
-        this.usernameerr = InputValidations.validateName(this.username)
-          ? false
-          : true
-        this.usernameerr = InputValidations.validateName(this.username)
-          ? false
-          : true
-        this.mobileerr = InputValidations.validateMobile(this.mobile)
-          ? false
-          : true
-        this.subjecterr = InputValidations.validateSubject(this.subject)
-          ? false
-          : true
-        this.descriptionerr = InputValidations.validateDescription(
-          this.description
-        )
-          ? false
-          : true
+      } else {
+        this.changeHandler()
       }
-      localStorage.setItem("userdata" , JSON.stringify({username:this.username , email:this.email , mobile:this.mobile}))
-
-      this.subject = ""
-      this.description = ""
+    },
+    handleResponse(status) {
+      status
+        ? this.snackBarVisibility(
+            "thanks for contacting us. our team will reach out shortly",
+            true,
+            "green"
+          )
+        : this.snackBarVisibility(
+            "sorry! an error occured while submitting. try after some time",
+            true
+          )
+    },
+    snackBarVisibility(message, statusColor) {
+      this.message = message
+      this.statusColor = statusColor
     },
     changeHandler(event) {
-      if (event.target.name === "username")
-        this.usernameerr = InputValidations.validateName(this.username)
-          ? false
-          : true
-      else if (event.target.name === "email")
-        this.usernameerr = InputValidations.validateName(this.username)
-          ? false
-          : true
-      else if (event.target.name === "mobile")
-        this.mobileerr = InputValidations.validateMobile(this.mobile)
-          ? false
-          : true
-      else if (event.target.name === "subject")
-        this.subjecterr = InputValidations.validateSubject(this.subject)
-          ? false
-          : true
-      else if (event.target.name === "description")
-        this.descriptionerr = InputValidations.validateDescription(
+      if (event) {
+        if (event.target.name === "username")
+          this.usernameErr = !InputValidations.validateName(this.username)
+        else if (event.target.name === "email")
+          this.emailErr = !InputValidations.validateEmail(this.email)
+        else if (event.target.name === "mobile")
+          this.mobileErr = !InputValidations.validateMobile(this.mobile)
+        else if (event.target.name === "subject")
+          this.subjectErr = !InputValidations.validateSubject(this.subject)
+        else
+          this.descriptionErr = !InputValidations.validateDescription(
+            this.description
+          )
+      } else {
+        this.usernameErr = !InputValidations.validateName(this.username)
+        this.emailErr = !InputValidations.validateEmail(this.email)
+        this.mobileErr = !InputValidations.validateMobile(this.mobile)
+        this.subjectErr = !InputValidations.validateSubject(this.subject)
+        this.descriptionErr = !InputValidations.validateDescription(
           this.description
         )
-          ? false
-          : true
+      }
     },
   },
 }
-
-// client id 381715156105-njr2md9g7sp45586mh4n36o21212c8cv.apps.googleusercontent.com
-
-// cliemt secret Op6X3JT_f3pWntlZGmAR_OyK
 </script>
-
-<style scoped></style>

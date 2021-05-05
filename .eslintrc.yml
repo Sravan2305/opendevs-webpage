@@ -6,6 +6,7 @@ env:
 extends:
   - "eslint:recommended"
   - "plugin:vue/essential"
+  - "prettier"
 parserOptions:
   ecmaVersion: 11
 rules:
@@ -25,3 +26,6 @@ rules:
   semi:
     - error
     - never
+  no-multiple-empty-lines: ["error", { "max": 1, "maxEOF": 1 }]
+  no-var: "error"
+  no-console: "error"

@@ -21,11 +21,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .not-found {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .not-found {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

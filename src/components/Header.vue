@@ -24,7 +24,6 @@
         <font-awesome class="theme-change" v-else :icon="['fas', 'moon']"/>
       </div>
 
-
       <div>
         <h2>
           <g-link :to="'/people'">

@@ -1,7 +1,4 @@
-[
-  
-
-  {
+[{
     "name": "mihir kumar",
     "username": "mikr13",
     "email": "mailto:mihirpandey.13@gmail.com",
@@ -31,42 +28,34 @@
     "projects": [],
     "programs": []
   },
-
-
-{
-  "name": "Venkata Sravan Kumar",
-  "username": "sravan23",
-  "email": "mailto:gollapudivenkatasravankumar@gmail.com",
-  "avatar": "/sravan.jpg",
-  "quote": "When you want something, all the universe conspires in helping you to achieve it",
-  "github_handle": "https://github.com/Sravan2305",
-  "linkedin_handle": "https://www.linkedin.com/in/sravankumar23/",
-  "twitter_handle": "https://twitter.com/",
-  "intro": "",
-  "achievements": [],
-  "talks": [],
-  "projects": [ ],
-  "programs": []
-}
- ,
-
- {
-  "name": "you ?",
-  "username": "bright_star",
-  "email": "",
-  "avatar": "you.png",
-  "quote": "quote that defines you?",
-  "github_handle": "",
-  "linkedin_handle": "",
-  "twitter_handle": "",
-  "intro": "",
-  "achievements": [],
-  "talks": [],
-  "projects": [],
-  "programs": []
-}
-  
-
-
-
+  {
+    "name": "venkata sravan kumar",
+    "username": "sravan23",
+    "email": "mailto:gollapudivenkatasravankumar@gmail.com",
+    "avatar": "/sravan.jpg",
+    "quote": "when you want something, all the universe conspires in helping you to achieve it",
+    "github_handle": "https://github.com/Sravan2305",
+    "linkedin_handle": "https://www.linkedin.com/in/sravankumar23/",
+    "twitter_handle": "https://twitter.com/",
+    "intro": "",
+    "achievements": [],
+    "talks": [],
+    "projects": [],
+    "programs": []
+  },
+  {
+    "name": "you ?",
+    "username": "bright_star",
+    "email": "",
+    "avatar": "you.png",
+    "quote": "quote that defines you?",
+    "github_handle": "",
+    "linkedin_handle": "",
+    "twitter_handle": "",
+    "intro": "",
+    "achievements": [],
+    "talks": [],
+    "projects": [],
+    "programs": []
+  }
 ]

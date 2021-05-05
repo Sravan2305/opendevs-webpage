@@ -23,6 +23,11 @@ jobs:
 
       - name: Project build
         run: yarn run build
+        env:
+          GRIDSOME_EMAILJS_SERVICE_ID: ${{ secrets.GRIDSOME_EMAILJS_SERVICE_ID }}
+          GRIDSOME_EMAILJS_TEMPLATE_ID: ${{ secrets.GRIDSOME_EMAILJS_TEMPLATE_ID }}
+          GRIDSOME_EMAILJS_USER_ID: ${{ secrets.GRIDSOME_EMAILJS_USER_ID }}
+          GRIDSOME_SHEET_BEST_URL: ${{ secrets.GRIDSOME_SHEET_BEST_URL }}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
