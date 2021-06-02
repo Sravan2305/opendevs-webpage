@@ -7,34 +7,46 @@
     </p>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block tracking-wide text-green-700 font-bold mb-2">
+        <label
+          class="block tracking-wide text-green-700 font-bold mb-2"
+          for="full-name"
+        >
           name <sup>{{ " " }}*</sup>
         </label>
         <input
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-          id="grid-first-name"
+          id="full-name"
           type="text"
           placeholder="full name"
           v-model="username"
           @change="changeHandler"
           name="username"
+          autocomplete="name"
         />
         <p v-if="this.usernameErr" class="text-red-500 text-xs italic">
           entered name is not valid
         </p>
       </div>
       <div class="w-full md:w-1/2 px-3">
+<<<<<<< HEAD
         <label class="block tracking-wide text-green-700 font-bold mb-2">
+=======
+        <label
+          class="block tracking-wide text-green-700 font-bold mb-2"
+          for="mobile"
+        >
+>>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           mobile
         </label>
         <input
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-          id="grid-last-name"
-          type="text"
+          id="mobile"
+          type="tel"
           placeholder="10 digit mobile no"
           v-model="mobile"
           @change="changeHandler"
           name="mobile"
+          autocomplete="tel"
         />
         <p v-if="this.mobileErr" class="text-red-500 text-xs italic">
           invalid mobile number
@@ -43,7 +55,14 @@
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
+<<<<<<< HEAD
         <label class="block tracking-wide text-green-700 font-bold mb-2">
+=======
+        <label
+          class="block tracking-wide text-green-700 font-bold mb-2"
+          for="email"
+        >
+>>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           e-mail<sup>{{ " " }}*</sup>
         </label>
         <input
@@ -54,6 +73,7 @@
           v-model="email"
           @change="changeHandler"
           name="email"
+          autocomplete="email"
         />
         <p v-if="this.emailErr" class="text-red-500 text-xs italic">
           invalid email format
@@ -62,12 +82,20 @@
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
+<<<<<<< HEAD
         <label class="block tracking-wide text-green-700 font-bold mb-2">
+=======
+        <label
+          class="block tracking-wide text-green-700 font-bold mb-2"
+          for="subject"
+        >
+>>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           subject<sup>{{ " " }}*</sup>
         </label>
         <input
           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           placeholder="enter the subject"
+          id="subject"
           v-model="subject"
           @change="changeHandler"
           name="subject"
@@ -79,7 +107,14 @@
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
+<<<<<<< HEAD
         <label class="block tracking-wide text-green-700 font-bold mb-2">
+=======
+        <label
+          class="block tracking-wide text-green-700 font-bold mb-2"
+          for="message"
+        >
+>>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           description
         </label>
         <textarea
@@ -113,11 +148,8 @@
 </template>
 
 <script>
-import * as InputValidations from "../utils/InputValidations"
-import { init, send } from "emailjs-com"
+import { validateEmail, validateMobile, validateName, validateDescription, validateSubject } from "../utils/InputValidations"
 import SnackBar from "./SnackBar.vue"
-
-init(process.env.GRIDSOME_EMAILJS_USER_ID)
 
 export default {
   name: "ContactUs",
@@ -142,6 +174,7 @@ export default {
   }),
   methods: {
     submit() {
+<<<<<<< HEAD
       const {
         validateEmail,
         validateMobile,
@@ -149,6 +182,8 @@ export default {
         validateDescription,
         validateSubject,
       } = InputValidations
+=======
+>>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
       if (
         validateEmail(this.email) &&
         validateMobile(this.mobile) &&
@@ -156,6 +191,7 @@ export default {
         validateDescription(this.description) &&
         validateSubject(this.subject)
       ) {
+<<<<<<< HEAD
         const emailData = {
           username: this.username,
           email: this.email,
@@ -169,6 +205,8 @@ export default {
           () => this.handleResponse(true),
           () => this.handleResponse(false)
         )
+=======
+>>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
 
         const sheetsData = {
           Name: this.username,
@@ -184,11 +222,17 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
+<<<<<<< HEAD
           body: JSON.stringify(sheetsData), /////Google Sheet Code
         }).then(
           () => this.handleResponse(true),
           () => this.handleResponse(false)
         )
+=======
+          body: JSON.stringify(sheetsData)
+        })
+          .then(() => this.handleResponse(true), () => this.handleResponse(false))
+>>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
       } else {
         this.changeHandler()
       }

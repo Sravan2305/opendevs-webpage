@@ -10,7 +10,7 @@
       </div>
       <div class="blog__body" v-html="$page.post.content"></div>
       <div class="blog__footer">
-        <h2>Written By: {{ $page.post.author }}</h2>
+        <h4>Written By: {{ $page.post.author }}</h4>
         <g-link :to="nextBlogPath">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -80,6 +80,16 @@ query getPostData ($path: String!) {
 .blog {
   h1 {
     margin-bottom: 0.7rem;
+  }
+  
+  a {
+    color: #34D399;
+    text-decoration: underline;
+    transition: opacity .2s ease;
+    -webkit-transition: opacity .2s ease;
+    -moz-transition: opacity .2s ease;
+    -ms-transition: opacity .2s ease;
+    -o-transition: opacity .2s ease;
   }
 }
 
