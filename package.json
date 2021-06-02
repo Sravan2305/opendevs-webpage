@@ -1,20 +1,20 @@
 {
   "name": "opendevs",
+  "version": "0.0.1",
   "private": false,
   "description": "A simple landing website to showcase open source contribution of opendevs",
-  "version": "0.0.1",
   "author": "open-devs",
   "scripts": {
     "build": "gridsome build",
-    "dev": "gridsome develop",
+    "lint": "vue-cli-service lint",
+    "deploy": "gh-pages -d dist",
     "clean": "rimraf .cache && rimraf dist && rimraf src/.temp",
+    "commit": "yarn lint && git cz",
+    "commit-a": "yarn lint && git add . && git cz",
+    "dev": "gridsome develop",
     "explore": "gridsome explore",
     "od": "gridsome develop -p 8080 --host 0.0.0.0",
-    "commit-a": "yarn lint && git add . && git cz",
-    "commit": "yarn lint && git cz",
-    "lint": "vue-cli-service lint",
-    "predeploy": "npm run clean && npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run clean && npm run build"
   },
   "dependencies": {
     "@gridsome/source-filesystem": "^0.6.2",
@@ -23,10 +23,10 @@
     "autoprefixer": "^9",
     "bowser": "^2.11.0",
     "emailjs-com": "^2.6.4",
-    "firebase": "^8.4.3",
     "googleapis": "^68.0.0",
     "gridsome": "^0.7.23",
     "postcss": "^7",
+    "register-service-worker": "^1.7.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "devDependencies": {
@@ -37,6 +37,7 @@
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "@gridsome/plugin-sitemap": "^0.4.0",
     "@vue/cli-plugin-eslint": "^4.5.12",
+    "@vue/cli-plugin-pwa": "~4.5.0",
     "@vue/cli-service": "^4.5.12",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.23.0",
