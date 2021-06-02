@@ -28,14 +28,10 @@
         </p>
       </div>
       <div class="w-full md:w-1/2 px-3">
-<<<<<<< HEAD
-        <label class="block tracking-wide text-green-700 font-bold mb-2">
-=======
         <label
           class="block tracking-wide text-green-700 font-bold mb-2"
           for="mobile"
         >
->>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           mobile
         </label>
         <input
@@ -55,14 +51,10 @@
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
-<<<<<<< HEAD
-        <label class="block tracking-wide text-green-700 font-bold mb-2">
-=======
         <label
           class="block tracking-wide text-green-700 font-bold mb-2"
           for="email"
         >
->>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           e-mail<sup>{{ " " }}*</sup>
         </label>
         <input
@@ -82,14 +74,10 @@
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
-<<<<<<< HEAD
-        <label class="block tracking-wide text-green-700 font-bold mb-2">
-=======
         <label
           class="block tracking-wide text-green-700 font-bold mb-2"
           for="subject"
         >
->>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           subject<sup>{{ " " }}*</sup>
         </label>
         <input
@@ -107,14 +95,10 @@
     </div>
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
-<<<<<<< HEAD
-        <label class="block tracking-wide text-green-700 font-bold mb-2">
-=======
         <label
           class="block tracking-wide text-green-700 font-bold mb-2"
           for="message"
         >
->>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
           description
         </label>
         <textarea
@@ -174,16 +158,6 @@ export default {
   }),
   methods: {
     submit() {
-<<<<<<< HEAD
-      const {
-        validateEmail,
-        validateMobile,
-        validateName,
-        validateDescription,
-        validateSubject,
-      } = InputValidations
-=======
->>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
       if (
         validateEmail(this.email) &&
         validateMobile(this.mobile) &&
@@ -191,22 +165,6 @@ export default {
         validateDescription(this.description) &&
         validateSubject(this.subject)
       ) {
-<<<<<<< HEAD
-        const emailData = {
-          username: this.username,
-          email: this.email,
-          mobile: this.mobile || "Not provided",
-          subject: this.subject,
-          description: this.description || "Not provided",
-        }
-        const TEMPLATE_ID = process.env.GRIDSOME_EMAILJS_TEMPLATE_ID
-        const SERVICE_ID = process.env.GRIDSOME_EMAILJS_SERVICE_ID
-        send(SERVICE_ID, TEMPLATE_ID, emailData).then(
-          () => this.handleResponse(true),
-          () => this.handleResponse(false)
-        )
-=======
->>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
 
         const sheetsData = {
           Name: this.username,
@@ -222,17 +180,9 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-<<<<<<< HEAD
-          body: JSON.stringify(sheetsData), /////Google Sheet Code
-        }).then(
-          () => this.handleResponse(true),
-          () => this.handleResponse(false)
-        )
-=======
           body: JSON.stringify(sheetsData)
         })
           .then(() => this.handleResponse(true), () => this.handleResponse(false))
->>>>>>> 409fcca21bfccd7a11d247ee68da9b283cff3516
       } else {
         this.changeHandler()
       }
